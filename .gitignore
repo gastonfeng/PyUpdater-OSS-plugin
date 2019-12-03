@@ -1,0 +1,13 @@
+build/
+
+dist/
+
+PyiUpdater_OSS_Plugin.egg-info/
+
+PyUpdater_OSS_Plugin.egg-info/*
+
+*.pyc
+
+.idea
+
+.DS_Store
