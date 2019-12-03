@@ -1,8 +1,8 @@
 from __future__ import print_function
 from __future__ import unicode_literals
 
-import shutil
 import os
+import shutil
 
 HOME = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -20,7 +20,7 @@ def check_x(x):
 
     def bad_dir(d):
         bad = ['__pycache__', 'build',
-               'dist', 'PyUpdater_OSS_Plugin.egg-info']
+               'dist', 'PyUpdater_oss_Plugin.egg-info']
         if os.path.basename(d) in bad:
             return True
         return False

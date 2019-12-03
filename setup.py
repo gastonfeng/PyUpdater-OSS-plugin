@@ -26,20 +26,19 @@ from setuptools import setup
 
 import versioneer
 
-
 with open('README.md', 'r') as f:
     readme = f.read()
 
 
 setup(
-    name='PyUpdater-OSS-Plugin',
+    name='PyUpdater-oss-Plugin',
     version=versioneer.get_version(),
-    description='Aliyun OSS plugin for PyUpdater',
+    description='Aliyun oss plugin for PyUpdater',
     long_description=readme,
     long_description_content_type='text/markdown',
     author='Kaikong Beijing',
     author_email='gastonfeng@gmail.com',
-    url='https://github.com/gastonfeng/PyUpdater-OSS-plugin.git',
+    url='https://github.com/gastonfeng/PyUpdater-oss-plugin.git',
     classifiers=[
         'Development Status :: 5 - Production/Stable',
         'License :: OSI Approved :: MIT License',
@@ -51,13 +50,14 @@ setup(
         'Environment :: Console'
                  ],
     platforms=['Any'],
-    install_requires=['boto3>=1.9.0'],
+    install_requires=['oss2>=2.9.0'],
+    provides=['pyupdater.plugins', ],
     entry_points={
-        'pyupdater.plugins.upload': [
-            'OSS = OSS_uploader:OSSUploader',
+        'pyupdater.plugins': [
+            'oss = oss_uploader:ossuploader',
         ],
     },
-    py_modules=['OSS_uploader'],
+    py_modules=['oss_uploader'],
     include_package_data=True,
     zip_safe=False,
 )

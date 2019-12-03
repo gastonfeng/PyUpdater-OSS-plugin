@@ -30,7 +30,6 @@ import sys
 import threading
 
 import oss2
-from boto3.session import Session
 
 try:
     from pyupdater.core.uploader import BaseUploader
@@ -42,15 +41,14 @@ from pyupdater.utils.exceptions import UploaderError
 log = logging.getLogger(__name__)
 
 
-class OSSUploader(BaseUploader):
-
-    name = 'OSS'
-    author = 'Digital Sapphire'
+class ossuploader(BaseUploader):
+    name = 'oss'
+    author = 'Kaikong Beijing'
 
     def init_config(self, config):
-        self.endpoint=os.environ.get('endpoint')
+        self.endpoint = os.environ.get('PYU_ENDPOINT')
         if self.endpoint is None:
-            raise UploaderError('Missing endpoint',
+            raise UploaderError('Missing PYU_ENDPOINT',
                                 expected=True)
         self.access_key = os.environ.get(u'PYU_ACCESSKEY')
         if self.access_key is None:
@@ -80,12 +78,9 @@ class OSSUploader(BaseUploader):
         self._connect()
 
     def _connect(self):
-        session = Session(aws_access_key_id=self.access_key,
-                          aws_secret_access_key=self.secret_key,
-                          aws_session_token=self.session_token,
-                          region_name='us-west-2')
-
-        self.OSS = session.client('OSS')
+        self.auth = oss2.Auth(self.access_key, self.secret_key)
+        # Endpoint以杭州为例，其它Region请按实际情况填写。
+        self.bucket = oss2.Bucket(self.auth, self.endpoint, self.bucket_name)
 
     def set_config(self, config):
         bucket_name = config.get('bucket_name')
@@ -94,7 +89,7 @@ class OSSUploader(BaseUploader):
         config['bucket_name'] = bucket_name
 
     def upload_file(self, filename):
-        """Uploads a single file to OSS
+        """Uploads a single file to oss
 
         Args:
             filename (str): Name of file to upload.
@@ -107,12 +102,10 @@ class OSSUploader(BaseUploader):
                 False - Upload Failed
         """
         try:
-            auth = oss2.Auth(self.access_key, self.secret_key)
-            # Endpoint以杭州为例，其它Region请按实际情况填写。
-            bucket = oss2.Bucket(auth, self.endpoint,self.bucket_name)
+
             with open(filename, 'rb') as fileobj:
-                bucket.put_object(os.path.basename(filename), fileobj)
-            log.debug('Uploaded {}'.format(filename))
+                self.bucket.put_object(os.path.basename(filename), fileobj)
+            log.info('Uploaded {}'.format(filename))
             return True
         except Exception as err:
             log.error('Failed to upload file')

@@ -2,9 +2,9 @@ build/
 
 dist/
 
-PyiUpdater_OSS_Plugin.egg-info/
+PyiUpdater_oss_Plugin.egg-info/
 
-PyUpdater_OSS_Plugin.egg-info/*
+PyUpdater_oss_Plugin.egg-info/*
 
 *.pyc
 

@@ -1,19 +1,19 @@
-[![PyPI version](https://badge.fury.io/py/PyUpdater-OSS-Plugin.svg)](https://badge.fury.io/py/PyUpdater-OSS-Plugin)
+[![PyPI version](https://badge.fury.io/py/PyUpdater-oss-Plugin.svg)](https://badge.fury.io/py/PyUpdater-oss-Plugin)
 
-# PyUpdater OSS plugin
+# PyUpdater oss plugin
 
-PyUpdater upload plugin for Aliyun OSS
+PyUpdater upload plugin for Aliyun oss
 
 ## Installing
 
-    $ pip install PyUpdater-OSS-plugin
+    $ pip install PyUpdater-oss-plugin
 
 
 ## Configuration
 
 System environmental variables
 
-Optional - If set will be used globally. Will be overwritten when you add OSS settings during pyupdater init
+Optional - If set will be used globally. Will be overwritten when you add oss settings during pyupdater init
 
 | Variable              | Meaning                                 |
 | --------------------- |---------------------------------------- |
