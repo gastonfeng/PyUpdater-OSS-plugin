@@ -63,7 +63,7 @@ class ossuploader(BaseUploader):
         self.session_token = os.environ.get(u'PYU_SESSION_TOKEN')
 
         # Try to get bucket from env var
-        self.bucket_name = os.environ.get(u'PYU_BUCKET')
+        self.bucket_name = os.environ.get(u'PYU_BUCKET').lower()
         bucket_name = config.get(u'bucket_name')
 
         # If there is a bucket name in the repo config we
